@@ -1,0 +1,27 @@
+#header {
+    padding-top: 50px;
+    text-align: center;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 21pt;
+    color: #558C89;
+}
+
+#date {
+    padding-right: 50px;
+    text-align: right;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 17pt;
+    color: #585858;
+}
+
+#text {
+    padding-left: 10%;
+    width: 80%;
+    height: 100%;
+}
+
+#h_comment {
+    text-align: center;
+    font-size: 18pt;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}

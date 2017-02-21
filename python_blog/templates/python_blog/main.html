@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+        {% load static %}
+        <!--<script type="text/javascript" src="{% static 'python_blog/main.js'%}"></script>-->
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+       <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+       <script>
+            $(function() {
+                var box = $('.move');
+                var button = $('#search_btn');
+                button.on('click', function() {
+                    box.toggleClass('active');});
+                return false;    
+            });
+       </script>  
+       <link href="{% static 'python_blog/style1.css' %}" type="text/css" rel="stylesheet">
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <title>Mr. Python</title>
+        <meta name="Python">
+    </head>
+    <body>
+        <div class="w3-top w3-hide-small">
+            <ul class="w3-navbar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#search">SEARCH</a></li>
+                <li><a href="#about">ABOUT & CONTACT</a></li>
+                <li><a href="#archive">ARCHIVE</a></li>
+             </ul>
+        </div>
+            <div class="bgimg w3-display-container w3-grayscale-min" id="home">
+                <form role="form" action="#" method="get">
+                    <input name="log" id="log" type="submit" value="Log in"/>
+                    <input name="sign" id="sign" type="submit" value="Sign in"/>
+                </form>
+            </div>
+
+            <div class="find w3-display-container w3-grayscale-min" id="search"> 
+                <form role="form" action="#" method="get">
+                    <div class="move">
+                        <p class="code">Let's code:</p>
+                        <input name="search_s" class="form-control input-lg" id="search_s" type="text" placeholder="Write your topic... "/> <p></p>
+                        <input name="search_btn" class="btn btn-info btn-outline" id="search_btn" type="submit" value="Search"/>
+                    </div>
+                </form>
+            </div>
+
+        <div class="about w3-display-container w3-grayscale-min" id="about">
+            <br><br><br><br><br><br>
+            <div id="cell1">
+                <p id="header_t">About</p>
+                <ul>
+                    <p>Hey! My name is Katte and
+                    I'm interested in Python projects.</p>
+                    <li>The goal of this blog - discuss
+                        problems, which you can meet when coding.</li> 
+                    <li>We will describe different modules,
+                        there functions.</li>
+                </ul>
+            </div>
+            <div id="cell2">
+                <p id="header_t">Contact</p>
+                <p>You can contact with me via email:
+                <strong>kattekurach@gmail.com</strong></p>
+                <p>Phone number: <strong>+375297633356</strong></p>
+            </div>
+            <p id="copyright">&copy Copyright Katrin Kurach, 2017</p>
+        </div>
+       <div class="archive w3-display-container w3-grayscale-min" id="archive">
+            <p id="h_article">All articles:</p>
+            <br><br><br>
+                {% for article in archive %}
+                    <div id="for_article">
+                        <p id="name_ar">{{article.0}}</p>
+                        <p id="min_text">{% autoescape off %}{{article.1}}{% endautoescape %}
+                        </p>
+                    </div>
+                {% endfor %}
+       </div>
+    </body>
+</html>

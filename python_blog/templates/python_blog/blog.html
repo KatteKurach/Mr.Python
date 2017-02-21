@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        {% load static %}
+        <link href="{% static 'python_blog/blog.css' %}" type="text/css" rel="stylesheet">
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <title>Mr. Python</title>
+        <meta name="Python">
+    </head>
+    <body>
+        {% if data %}
+        <p id="header">{{ data.0 }}</p>
+        <p id="date">{{ data.1 }}</p>
+        <div id="text">
+            {% autoescape off %}{{data.2}}{% endautoescape %}
+        </div>
+        {% endif %}
+        <div id="comment">
+            <p id="h_comment">Comments</p>
+            {% if comments %}
+                {% for comment in comments %}
+                <div id="one_comment">
+                    <p id="username"> {{comment.0}} </p>
+                    <p id="value_c"> {{comment.1}} </p>
+                </div>
+                {% endfor%}
+            {% endif %}
+        </div>
+    </body>
+</html>

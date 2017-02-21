@@ -1,0 +1,31 @@
+.out {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("images/fon4.jpg");
+    min-height: 100%;
+}
+            
+#head {
+    padding-top: 100px;
+    text-align: center;
+    color:white;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 28pt;
+}
+                        
+#main_d {
+     font-family: "Comic Sans MS", cursive, sans-serif;
+     font-size: 16pt;
+     color: white;
+     padding-top: 50px;;
+     margin: 0 auto;
+     position: relative;
+     top: 25%;
+     width: 30%;
+     height: 100%;
+}
+
+#btn_log {
+     width: 150px;
+     margin-left: 100px;
+}
