@@ -1,0 +1,23 @@
+.archive {
+    float: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+    min-height: 100%;
+    color: black;
+}
+
+#for_article {
+    border: 1px dotted blue;
+    width: 600px;
+    height: 100px;
+    margin-left: 350px;
+}
+
+#h_article {
+    padding-top: 150px;
+    margin-left: 550px;
+    color: #69536C;
+    font-size: 21pt;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}

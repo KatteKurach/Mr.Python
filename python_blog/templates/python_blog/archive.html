@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html>
+    <header>
+        {% load static %}
+        <p id="h_article">All articles:</p>
+        <link href="{% static 'python_blog/archive.css' %}" 
+            type="text/css"rel="stylesheet">
+    </header>
+    <body>
+        <br><br><br>
+        {% for article in archive %}
+            <div id="for_article">
+                <p id="name_ar">{{article.0}}</p> 
+                <p id="min_text">{% autoescape off %}{{article.1}}
+                {% endautoescape %}</p>
+            </div>
+        {% endfor %}
+    </body>
+</html>                                                     
+
