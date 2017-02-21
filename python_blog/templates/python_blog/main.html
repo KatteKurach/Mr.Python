@@ -27,7 +27,7 @@
                 <li><a href="#">HOME</a></li>
                 <li><a href="#search">SEARCH</a></li>
                 <li><a href="#about">ABOUT & CONTACT</a></li>
-                <li><a href="#archive">ARCHIVE</a></li>
+                <li><a href="/home/archive/">ARCHIVE</a></li>
              </ul>
         </div>
             <div class="bgimg w3-display-container w3-grayscale-min" id="home">
@@ -68,16 +68,5 @@
             </div>
             <p id="copyright">&copy Copyright Katrin Kurach, 2017</p>
         </div>
-       <div class="archive w3-display-container w3-grayscale-min" id="archive">
-            <p id="h_article">All articles:</p>
-            <br><br><br>
-                {% for article in archive %}
-                    <div id="for_article">
-                        <p id="name_ar">{{article.0}}</p>
-                        <p id="min_text">{% autoescape off %}{{article.1}}{% endautoescape %}
-                        </p>
-                    </div>
-                {% endfor %}
-       </div>
     </body>
 </html>
