@@ -1,23 +1,35 @@
-.archive {
-    float: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: white;
-    min-height: 100%;
-    color: black;
-}
-
 #for_article {
-    border: 1px dotted blue;
-    width: 600px;
-    height: 100px;
-    margin-left: 350px;
+    max-width: 650px;
+    height: 120px;
+    margin-left: 320px;
 }
 
 #h_article {
-    padding-top: 150px;
+    padding-top: 20px;
     margin-left: 550px;
     color: #69536C;
     font-size: 21pt;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
+
+#min_text {
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+#name_ar {
+    padding-top: 10px;
+    margin-left: 10px;
+    color: #99004C;
+    font-size: 14pt;
+}
+
+
+#time {
+    margin-left: 15px;
+    margin-top: 5px;
+    font-size: 10pt;
+    color: #A0A0A0;
+    font-family: 'Gill Sans', sans-serif;
+}
+

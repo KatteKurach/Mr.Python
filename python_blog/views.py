@@ -3,12 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Article, Tag, Relation, Users
 
 def home(request):
-    articles = Article.objects.all()
-    archive = []
-    for a in articles:
-        archive.append((a.header, a.text[:300] + '...'))
-        print archive
-    context = {'archive': archive}
+    context = {}
     if request.GET.get('log'):
         return render(request, 'python_blog/log.html', {})
     if request.GET.get('sign'):
@@ -16,6 +11,17 @@ def home(request):
     if request.GET.get('search_btn'):
         print request.GET.get('search_s')
     return render(request, 'python_blog/main.html', context)
+
+def archive(request): 
+    articles = Article.objects.all()
+    arch = []
+
+    for a in articles:
+        arch.append((a.header, a.date, a.text[:500] + '...'))
+    context = {'archive': arch}
+    return render(request, 'python_blog/archive.html', context)
+
+
 
 def log(request):
     return render(request, 'python_blog/log.html', {})
