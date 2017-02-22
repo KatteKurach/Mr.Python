@@ -4,6 +4,9 @@ from .models import Article, Tag, Relation, Users
 from collections import defaultdict
 import operator
 
+from django.contrib.auth.models import User as u
+from django.contrib.auth import authenticate
+
 
 def remake(s):
     s = s.strip().lower()
@@ -57,6 +60,20 @@ def archive(request):
 
 
 def log(request):
+    if request.POST.get('btn_log'):
+        g_email = request.POST.get('email_s')
+        g_password = request.POST.get('password_s')
+        name = Users.objects.filter(email=g_email)
+        check_user = authenticate(username = name.username, password=g_password)
+
+        if check_user is not None:
+            if check_user.is_active:
+                print("User is valid, active and authenticated")
+                return render(request, 'python_blog/main.html', {})
+            else:
+                print("The password is valid, but the account has been disabled!")
+        else:
+            print("The username and password were incorrect.")
     return render(request, 'python_blog/log.html', {})
 
 
@@ -72,6 +89,10 @@ def sign(request):
             new_user = Users(username = name, email = new_email, \
                     password = new_password)
             new_user.save()
+        
+            add_u = u.objects.create_user(name, new_email, new_password)
+            add_u.save()
+            print '___________in sign___________'
             return render(request, 'python_blog/main.html', {})
     
     return render(request, 'python_blog/sign.html', {})
