@@ -2,23 +2,25 @@
 <html>
     <head>
         {% load static %}
-        <link href="{% static 'python_blog/sign.css' %}" type="text/css"         rel="stylesheet">
+        <link href="{% static 'python_blog/log.css' %}" type="text/css"         rel="stylesheet">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <title>Mr. Python</title>
         <meta name="Python">
     </head>
     <body>
+        {% csrf_token %}
         <div class="out w3-display-container w3-grayscale-min">
             <p id="head">Log in</p>
             <div id="main_d">
-                <form role="form" action="#" method="get">
+                <form role="form" action="#" method="post">
+                    {% csrf_token %}
                     <p>Email</p>
-                    <input class="form-control input-lg" type="email"/>
+                    <input name="email_s" class="form-control input-lg" type="email"/>
                     <p>Password</p>
-                    <input class="form-control input-lg" type="password"/>
+                    <input name="password_s" class="form-control input-lg" type="password"/>
                     <br>
-                    <input id="btn_log" class="btn btn-warning" type="submit" value="Log in"/>
+                    <input name="btn_log" class="btn btn-warning" type="submit" value="Log in"/>
                 </form>
             </div>
             <br><br><br><br><br><br<br><br><br><br><br><br><br><br><br><br><br>

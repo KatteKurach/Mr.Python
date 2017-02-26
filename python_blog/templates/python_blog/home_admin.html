@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        {% load static %}
+        <link href="{% static 'python_blog/home_admin.css' %}" type="text/css" rel="stylesheet">
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <title>Mr. Python</title>
+        <meta name="Python">
+    </head>
+    <body>
+        <div>
+            {% if view_article %}
+            {% autoescape off %}
+                {{ view_article }}
+            {% endautoescape %}
+            {% endif %}
+         
+        </div>
+        <div id="table">
+            <div id="cell1">
+                {% csrf_token %}
+                {% for art in articls %}
+                    <div id="article">
+                        <p id="name">{{art}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div id="cell2">
+                <textarea>
+                    {% if view_article %}
+                        {% autoescape off %}
+                        {{ view_article }}
+                        {% endautoescape %}
+                    {% endif %}
+                </textarea>
+            </div>
+        </div>
+        <div id="buttons">
+            {% csrf_token %}
+            <form role="form" action="#" method="post">
+                <input name="save" class="btn btn-info btn-o utline" id="save" type="submit" value="save"/>
+                <input name="view" class="btn btn-info btn-o utline" id="view" type="submit" value="view"/>
+                <input name="delete" class="btn btn-info btn-o utline" id="delete" type="submit" value="delete"/>
+            </form>
+        </div>
+    </body>
+</html>
