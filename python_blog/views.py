@@ -4,8 +4,9 @@ from .models import Article, Tag, Relation, Users
 from collections import defaultdict
 import operator
 
+
 from django.contrib.auth.models import User as u
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 
 
 def remake(s):
@@ -37,16 +38,25 @@ def getArticles(s):
     return ans
 
 
+def admin(request):
+    names = []
+    art = []
+    for a in Article.objects.all():
+        names.append(a.header)
+        art.append(a.text)
+    context = {'articls': names, 'view_article': art[0]}
+    return render(request, 'python_blog/home_admin.html', context)
+
+
 def home(request):
     context = {}
     if request.GET.get('log'):
-        return render(request, 'python_blog/log.html', {})
+        return redirect('/home/log/')
     if request.GET.get('sign'):
         return redirect('/home/sign/') 
     if request.GET.get('search_btn'):
         s = request.GET.get('search_s')
         articles = getArticles(s)
-        print articles
     return render(request, 'python_blog/main.html', context)
 
 
@@ -63,17 +73,15 @@ def log(request):
     if request.POST.get('btn_log'):
         g_email = request.POST.get('email_s')
         g_password = request.POST.get('password_s')
-        name = Users.objects.filter(email=g_email)
+        name = Users.objects.filter(email=g_email)[0]
         check_user = authenticate(username = name.username, password=g_password)
-
+        
         if check_user is not None:
             if check_user.is_active:
-                print("User is valid, active and authenticated")
-                return render(request, 'python_blog/main.html', {})
-            else:
-                print("The password is valid, but the account has been disabled!")
-        else:
-            print("The username and password were incorrect.")
+                login(request, check_user)
+                if name.username == 'ekaterina_bloger_python':
+                    return redirect('/home/hadmin/')
+                return redirect('/home/')
     return render(request, 'python_blog/log.html', {})
 
 
@@ -88,13 +96,11 @@ def sign(request):
                 len(Users.objects.filter(email = new_email)) == 0):
             new_user = Users(username = name, email = new_email, \
                     password = new_password)
+
             new_user.save()
-        
             add_u = u.objects.create_user(name, new_email, new_password)
             add_u.save()
-            print '___________in sign___________'
-            return render(request, 'python_blog/main.html', {})
-    
+            return redirect('/home/')
     return render(request, 'python_blog/sign.html', {})
 
 
@@ -102,4 +108,3 @@ def blog(request):
     temp = Article.objects.all()[0]
     context = {'data': [temp.header, temp.date, temp.text]}
     return render(request, 'python_blog/blog.html', context)
-
