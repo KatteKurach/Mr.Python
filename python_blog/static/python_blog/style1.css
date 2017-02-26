@@ -7,13 +7,13 @@ body, html {
     opacity: 0.4;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
+
 .bgimg {
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url("images/fon.jpg");
     min-height: 100%;
 }
-
 
 
 .find {
@@ -32,19 +32,23 @@ body, html {
     min-height: 100%;
     color: white;
 }
-
 .move {
+    animation: MoveUp 1s linear infinite;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    left: 40%;
+    top: 40%;
 }
 
-.move.active 
-{
-    background: red;
+@keyframes MoveUp{
+    50% { 
+        top: 30%;
+    }
+    
+    100% {
+        top: 20%;
+    }
 }
+
 
 .code {
     color: white;

@@ -45,6 +45,8 @@ def admin(request):
         names.append(a.header)
         art.append(a.text)
     context = {'articls': names, 'view_article': art[0]}
+    if request.POST.get('save'):
+        print request.GET.get('text')
     return render(request, 'python_blog/home_admin.html', context)
 
 

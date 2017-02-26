@@ -1,3 +1,7 @@
+html {
+    background-color: black;
+}
+
 .out {
     background-repeat: no-repeat;
     background-size: cover;

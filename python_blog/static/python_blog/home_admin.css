@@ -1,0 +1,37 @@
+#view_blog {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+#buttons {
+    width: 50%;
+    margin-left: 40%;
+}
+
+.btn {
+    width: 100px;
+    height: 30px;
+    color: #004C99;
+}
+
+#cell1 {
+    text-align: center;
+    color: #009999;
+    font-size: 12pt;
+    float: left;
+    width: 30%;
+    height: 40%;
+}
+
+#cell2 {
+    float: left;
+    width: 70%;
+    height: 40%;
+}
+
+textarea {
+    width: 95%;
+    height: 500px;
+    resize: none;
+}
