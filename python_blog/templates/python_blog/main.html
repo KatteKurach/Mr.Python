@@ -3,18 +3,9 @@
     <head>
 
         {% load static %}
-        <!--<script type="text/javascript" src="{% static 'python_blog/main.js'%}"></script>-->
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-       <script>
-            $(function() {
-                var box = $('.move');
-                var button = $('#search_btn');
-                button.on('click', function() {
-                    box.toggleClass('active');});
-                return false;    
-            });
-       </script>  
+       <script type="text/javascript" src="{% static 'python_blog/main.js'%}"></script>
        <link href="{% static 'python_blog/style1.css' %}" type="text/css" rel="stylesheet">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -38,13 +29,13 @@
             </div>
 
             <div class="find w3-display-container w3-grayscale-min" id="search"> 
-                <form role="form" action="#" method="get">
-                    <div class="move">
-                        <p class="code">Let's code:</p>
-                        <input name="search_s" class="form-control input-lg" id="search_s" type="text" placeholder="Write your topic... "/> <p></p>
-                        <input name="search_btn" class="btn btn-info btn-outline" id="search_btn" type="submit" value="Search"/>
-                    </div>
-                </form>
+                <div class="move">
+                    <p class="code">Let's code:</p>
+                    <input name="search_s" class="form-control input-lg" id="search_s" type="text" placeholder="Write your topic... "/> <p></p>
+                    <input name="search_btn" class="btn btn-info btn-outline" id="search_btn" type="button" value="Search"/>
+                </div>
+                <div id="search_results">
+                </div>
             </div>
 
         <div class="about w3-display-container w3-grayscale-min" id="about">

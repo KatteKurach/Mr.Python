@@ -2,14 +2,17 @@
 <html>
     <head>
         {% load static %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <link href="{% static 'python_blog/home_admin.css' %}" type="text/css" rel="stylesheet">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script type="text/javascript" src="{% static 'python_blog/admin.js'%}"></script>
         <title>Mr. Python</title>
         <meta name="Python">
     </head>
     <body>
         <div id="view_blog">
+            {% csrf_token %}        
             {% if view_article %}
             {% autoescape off %}
                 {{ view_article }}
@@ -28,15 +31,16 @@
             <div id="cell1">
                 {% csrf_token %}
                 {% for art in articls %}
-                    <div id="article">
-                        <p id="name">{{art}}</p>
+                    <div class="articlename" id="{{art.0}}">
+                        <p>{{art.1}}</p>
                         <hr noshared>
                     </div>
                 {% endfor %}
             </div>
             <div id="cell2">
                 <form action="" method="get">
-                    <textarea name='text'>
+                    <textarea name='text' id='article_text'>
+                    {% csrf_token %}        
                         {% if view_article %}
                             {{ view_article }}
                         {% endif %}

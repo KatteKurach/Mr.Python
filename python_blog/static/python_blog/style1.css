@@ -33,13 +33,13 @@ body, html {
     color: white;
 }
 .move {
-    animation: MoveUp 1s linear infinite;
+/*    animation: MoveUp 1s linear infinite;*/
     position: absolute;
     left: 40%;
     top: 40%;
 }
 
-@keyframes MoveUp{
+/*@keyframes MoveUp{
     50% { 
         top: 30%;
     }
@@ -47,7 +47,7 @@ body, html {
     100% {
         top: 20%;
     }
-}
+}*/
 
 
 .code {

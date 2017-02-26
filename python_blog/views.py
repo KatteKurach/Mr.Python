@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.serializers.json import DjangoJSONEncoder
 from .models import Article, Tag, Relation, Users
 from collections import defaultdict
 import operator
+import json
 
 
 from django.contrib.auth.models import User as u
@@ -34,15 +36,21 @@ def getArticles(s):
     ans = []
     for i in sorted_article:
         i = i[0]
-        ans.append((i.header, i.date, i.text))
+        ans.append((i.header, i.date, i.text, i.id))
     return ans
 
 
 def admin(request):
+    if request.GET.get('id'):
+        article_id = request.GET.get('id')
+        text = Article.objects.filter(pk=int(article_id))[0].text
+        print text
+        return HttpResponse(json.dumps(text, cls=DjangoJSONEncoder), content_type='application/json')
+
     names = []
     art = []
     for a in Article.objects.all():
-        names.append(a.header)
+        names.append([a.id, a.header])
         art.append(a.text)
     context = {'articls': names, 'view_article': art[0]}
     if request.POST.get('save'):
@@ -56,9 +64,10 @@ def home(request):
         return redirect('/home/log/')
     if request.GET.get('sign'):
         return redirect('/home/sign/') 
-    if request.GET.get('search_btn'):
-        s = request.GET.get('search_s')
+    if request.GET.get('query'):
+        s = request.GET.get('query')
         articles = getArticles(s)
+        return HttpResponse(json.dumps(articles, cls=DjangoJSONEncoder), content_type='application/json')
     return render(request, 'python_blog/main.html', context)
 
 
@@ -106,7 +115,7 @@ def sign(request):
     return render(request, 'python_blog/sign.html', {})
 
 
-def blog(request):
-    temp = Article.objects.all()[0]
+def blog(request, article_id):
+    temp = Article.objects.filter(pk=article_id)[0]
     context = {'data': [temp.header, temp.date, temp.text]}
     return render(request, 'python_blog/blog.html', context)
