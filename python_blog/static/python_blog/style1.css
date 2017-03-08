@@ -23,6 +23,12 @@ body, html {
     min-height: 100%;
 }
 
+#search_results {
+    padding-top: 15%;
+    margin-left: 15%;
+    width: 70%;
+    color: white;
+}
 
 .about { 
     float: center;
@@ -33,21 +39,10 @@ body, html {
     color: white;
 }
 .move {
-/*    animation: MoveUp 1s linear infinite;*/
     position: absolute;
     left: 40%;
     top: 40%;
 }
-
-/*@keyframes MoveUp{
-    50% { 
-        top: 30%;
-    }
-    
-    100% {
-        top: 20%;
-    }
-}*/
 
 
 .code {

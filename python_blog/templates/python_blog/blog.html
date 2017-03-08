@@ -16,14 +16,28 @@
             {% autoescape off %}{{data.2}}{% endautoescape %}
         </div>
         {% endif %}
+        <br><br><br>
+        <div id="add_comment">
+            {% if log_user %}
+            <p id="username">{{log_user}}:</p>
+            {% endif %}
+            <form role="form" action="#" method="post">
+                <textarea name="text_comment" id="text_comment" placeholder="Write your comment..."></textarea><br>
+                {% csrf_token %}
+                <input name="btn_add" id="btn_com" class="w3-btn w3-white w3-border w3-border-blue w3-text-blue w3-round-large" type="submit" value="To comment">
+                </input>
+            </form>
+        </div>
+        <br><br><br>
         <div id="comment">
-            <p id="h_comment">Comments</p>
+            <p id="h_comment">Comments</p><br>
             {% if comments %}
                 {% for comment in comments %}
                 <div id="one_comment">
-                    <p id="username"> {{comment.0}} </p>
+                    <p id="username"> {{comment.0}}: </p>
                     <p id="value_c"> {{comment.1}} </p>
-                </div>
+                    <hr>
+                </div><br>
                 {% endfor%}
             {% endif %}
         </div>

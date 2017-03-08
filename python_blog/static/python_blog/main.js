@@ -14,8 +14,8 @@ function settleResponse(data) {
         var container = '<div>';
             container += '<a href="blog/' + id + '">' + name + '</a>';
             container += '<p><span>' + date + '</span></p>';
-            container += '<br>' + text;
-        container += '</div>';
+            container += text;
+        container += '<hr></div>';
         $('#search_results').append(container);
     }
 }
@@ -37,7 +37,15 @@ function searchRequest() {
 
 
 function setHandlers() {
+    var flag = true;
     $('#search_btn').click(function() {
+        var x = $('.move').position();
+        if (flag) {
+            flag = false;
+            $('.move').animate({
+                'margin-top' : "-=250px"
+            });
+        }
         searchRequest(); 
     });
 }

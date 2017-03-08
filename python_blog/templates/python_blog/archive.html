@@ -10,7 +10,7 @@
         <br><br>
         {% for article in archive %}
             <div id="for_article">
-                <p id="name_ar">{{article.0}}</p>
+                <a href="/home/blog/{{article.3}}" id="name_ar">{{article.0}}</a>
                 <p id="time">{{article.1}}</p>
                 <p id="min_text">{% autoescape off %}{{article.2}}
                 {% endautoescape %}</p>

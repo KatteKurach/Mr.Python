@@ -30,7 +30,15 @@
     height: 40%;
 }
 
-textarea {
+
+#article_title {
+    height: 1.8em;
+    width: 95%;
+    resize: none;
+}
+
+
+#article_text {
     width: 95%;
     height: 500px;
     resize: none;

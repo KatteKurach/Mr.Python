@@ -20,12 +20,9 @@
             {% endif %}
         </div><br>
         <div id="buttons">
-            <form role="form" action="" method="post">
-            {% csrf_token %}
-                <input name="save" class="btn btn-info btn-o utline" id="save" type="submit" value="save"/>
-                <input name="view" class="btn btn-info btn-o utline" id="view" type="submit" value="view"/>
-                <input name="delete" class="btn btn-info btn-o utline" id="delete" type="submit" value="delete"/>
-            </form>
+            <input name="save" class="btn btn-info btn-o utline" id="save" type="button" value="save"/>
+            <input name="view" class="btn btn-info btn-o utline" id="view" type="button" value="view"/>
+            <input name="delete" class="btn btn-info btn-o utline" id="delete" type="button" value="delete"/>
         </div><br>
         <div id="table">
             <div id="cell1">
@@ -39,8 +36,9 @@
             </div>
             <div id="cell2">
                 <form action="" method="get">
+                    {% csrf_token %}
+                    <textarea name='title' id='article_title'>{{ articls.0.1 }}</textarea>
                     <textarea name='text' id='article_text'>
-                    {% csrf_token %}        
                         {% if view_article %}
                             {{ view_article }}
                         {% endif %}

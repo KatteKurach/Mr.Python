@@ -33,6 +33,7 @@ STATIC_URL = '/static/'
 
 INSTALLED_APPS = [
     'python_blog',
+    'rolepermissions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
