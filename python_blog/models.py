@@ -26,3 +26,7 @@ class Comments(models.Model):
 class CommentsToArticles(models.Model):
     arcticle = models.ForeignKey('Article', on_delete=models.CASCADE,)
     comment = models.ForeignKey('Comments', on_delete=models.CASCADE,)
+
+class Likes(models.Model):
+    article = models.ForeignKey('Article', on_delete=models.CASCADE,)
+    user = models.ForeignKey('Users', on_delete=models.CASCADE,)

@@ -16,6 +16,16 @@
             {% autoescape off %}{{data.2}}{% endautoescape %}
         </div>
         {% endif %}
+        <div id="likes">
+            <p id="text_like">Like it!</p>
+            <form role="form" action="#" method="post">
+                {% csrf_token %}
+                <input name="btn_like" id="btn_like" type="submit"/> 
+            </form>
+            {% if cal_likes %}
+                <p id="count_likes">{{cal_likes}}</p>
+            {% endif %}
+        </div>
         <br><br><br>
         <div id="add_comment">
             {% if log_user %}

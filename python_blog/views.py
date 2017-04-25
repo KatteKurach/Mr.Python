@@ -146,6 +146,22 @@ def add_comment(article_id, text, u_email):
     new_rel.save()
 
 
+def getLikes(article_id):
+    likes = Likes.objects.filter(article = article_id)
+    return len(likes)
+
+
+def addLike(article_id, u_email):
+    u = Users.objects.filter(email = u_email)[0]
+    user_like = Likes.objects.filter(user = u, \
+            article = Article.objects.filter(pk=int(article_id))[0])
+    print '________________' + str(len(user_like))
+    if len(user_like) < 1:
+        new_like = Likes(article = Article.objects.filter(pk=int(article_id))[0], \
+            user = u)
+        new_like.save()
+
+
 def blog(request, article_id):
     if request.POST.get('btn_add'):
         try:
@@ -153,10 +169,13 @@ def blog(request, article_id):
                 request.user.email)
         except Exception as e:
             print e
+    if request.POST.get('btn_like'):
+        addLike(article_id, request.user.email)    
     temp = Article.objects.filter(pk=article_id)[0]
     comments = CommentsToArticles.objects.filter(arcticle=temp)
     com = []
     for i in comments:
         com.append([i.comment.username.username, i.comment.value])
-    context = {'log_user': request.user, 'data': [temp.header, temp.date, temp.text], 'comments': com}
+    context = {'log_user': request.user, 'data': [temp.header, temp.date, temp.text], \
+            'comments': com, 'cal_likes': getLikes(article_id)}
     return render(request, 'python_blog/blog.html', context)

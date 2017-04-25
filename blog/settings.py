@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 STATIC_URL = '/static/'
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'Client_ID'#AIzaSyB4LrrvGeJjV10lG56OtrT2wfLDq3wFmzA'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'QBj4L3KwV1-DtMxMqeSqK2lw'
+
 INSTALLED_APPS = [
     'python_blog',
     'rolepermissions',
