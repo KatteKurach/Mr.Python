@@ -22,10 +22,12 @@
              </ul>
         </div>
             <div class="bgimg w3-display-container w3-grayscale-min" id="home">
-                <form role="form" action="#" method="get">
-                    <input name="log" id="log" type="submit" value="Log in"/>
-                    <input name="sign" id="sign" type="submit" value="Sign in"/>
-                </form>
+                {% if user %}
+                    <input name="log" id="log" type="button" value="Log in"/>
+                    <input name="sign" id="sign" type="button" value="Sign in"/>
+                {% else %}
+                    <input name="log_out" id="log_out" type="button" value="Log out"/>
+                {% endif %}
             </div>
 
             <div class="find w3-display-container w3-grayscale-min" id="search"> 

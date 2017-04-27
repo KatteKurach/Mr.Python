@@ -13,10 +13,10 @@ function articleContentRequest(article_id) {
         url: '',
         type: 'GET',
         data: {
-            id: article_id 
+            id: article_id
         },
         success: function(data) {
-            updateText(data); 
+            updateText(data);
         }
     });
 }

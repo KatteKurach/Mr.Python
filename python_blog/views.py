@@ -8,8 +8,7 @@ import json
 
 
 from django.contrib.auth.models import User as u
-from django.contrib.auth import authenticate, login
-
+from django.contrib.auth import authenticate, login, logout
 
 def remake(s):
     s = s.strip().lower()
@@ -57,7 +56,7 @@ def admin(request):
         header = request.GET.get('header')
         text = request.GET.get('article')
         saveArticle(id, header, text)
-    
+
     elif request.GET.get('type') and request.GET.get('type') == 'delete':
         id = request.GET.get('id')
         deleteArticle(id)
@@ -81,11 +80,11 @@ def admin(request):
 
 
 def home(request):
-    context = {}
-    if request.GET.get('log'):
-        return redirect('/home/log/')
-    if request.GET.get('sign'):
-        return redirect('/home/sign/') 
+    context = {'user': True}
+    if request.user.is_authenticated:
+        context['user'] = False
+    if request.GET.get('log_out'):
+        logout(request)
     if request.GET.get('query'):
         s = request.GET.get('query')
         if s != '':
@@ -94,7 +93,7 @@ def home(request):
     return render(request, 'python_blog/main.html', context)
 
 
-def archive(request): 
+def archive(request):
     articles = Article.objects.all()
     arch = []
     for a in articles:
@@ -104,46 +103,63 @@ def archive(request):
 
 
 def log(request):
-    if request.POST.get('btn_log'):
-        g_email = request.POST.get('email_s')
-        g_password = request.POST.get('password_s')
-        name = Users.objects.filter(email=g_email)[0]
+    if request.GET.get('btn_log'):
+        g_email = request.GET.get('email_s')
+        g_password = request.GET.get('password_s')
+        name = Users.objects.filter(email=g_email)
+        if (len(name) == 0):
+            data =  {'status': 'error'}
+            return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
+        name = name[0]
         check_user = authenticate(username = name.username, password=g_password)
-        
+
         if check_user is not None:
             if check_user.is_active:
                 login(request, check_user)
+                data =  {'status': 'ok'}
                 if name.username == 'ekaterina_bloger_python':
                     return redirect('/home/hadmin/')
-                return redirect('/home/')
+                    data = {'status': 'admin'}
+                return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
+        else:
+            data = {'status': 'error'}
+            return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
     return render(request, 'python_blog/log.html', {})
 
 
 def sign(request):
-    if request.POST.get('btn_sign'):
-        name = request.POST.get('user_name')
-        new_email = request.POST.get('in_email')
-        new_password = request.POST.get('in_password')
-        conf = request.POST.get('in_conf')
+    if request.GET.get('btn_sign'):
+        name = request.GET.get('user_name')
+        new_email = request.GET.get('in_email')
+        new_password = request.GET.get('in_password')
+        conf = request.GET.get('in_conf')
 
-        if (new_password == conf and \
-                len(Users.objects.filter(email = new_email)) == 0):
-            new_user = Users(username = name, email = new_email, \
-                    password = new_password)            
+        if len(Users.objects.filter(email = new_email)) == 0:
+            new_user = Users(username = name, email = new_email,
+                             password = new_password)
             new_user.save()
             add_u = u.objects.create_user(name, new_email, new_password)
             add_u.save()
-            return redirect('/home/')
+            data =  {'status': 'ok'}
+            return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
+        else:
+            data = {'status': 'bad_email'}
+        return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
     return render(request, 'python_blog/sign.html', {})
 
 
-def add_comment(article_id, text, u_email):
-    u = Users.objects.filter(email = u_email)[0] 
-    new_com = Comments(username = u, value = text)
-    new_com.save()
-    new_rel = CommentsToArticles(arcticle = Article.objects.filter(pk=int(article_id))[0], \
-            comment = new_com)
-    new_rel.save()
+def add_comment(article_id, request):
+    text = request.GET.get('text_comment')
+    if request.user.is_authenticated:
+        u_email = request.user.email
+        u = Users.objects.filter(email = u_email)[0]
+        new_com = Comments(username = u, value = text)
+        new_com.save()
+        new_rel = CommentsToArticles(arcticle = Article.objects.filter(pk=int(article_id))[0], \
+                comment = new_com)
+        new_rel.save()
+        return True
+    return False
 
 
 def getLikes(article_id):
@@ -151,26 +167,34 @@ def getLikes(article_id):
     return len(likes)
 
 
-def addLike(article_id, u_email):
-    u = Users.objects.filter(email = u_email)[0]
-    user_like = Likes.objects.filter(user = u, \
-            article = Article.objects.filter(pk=int(article_id))[0])
-    print '________________' + str(len(user_like))
-    if len(user_like) < 1:
-        new_like = Likes(article = Article.objects.filter(pk=int(article_id))[0], \
-            user = u)
-        new_like.save()
+def addLike(article_id, request):
+    if request.user.is_authenticated:
+        u_email = request.user.email
+        u = Users.objects.filter(email=u_email)[0]
+        user_like = Likes.objects.filter(user=u, article=Article.objects.filter(pk=int(article_id))[0])
+        if len(user_like) < 1:
+            new_like = Likes(article=Article.objects.filter(pk=int(article_id))[0], user=u)
+            new_like.save()
+        return True
+    return False
 
 
 def blog(request, article_id):
-    if request.POST.get('btn_add'):
-        try:
-            add_comment(article_id, request.POST.get('text_comment'), \
-                request.user.email)
-        except Exception as e:
-            print e
-    if request.POST.get('btn_like'):
-        addLike(article_id, request.user.email)    
+    if request.GET.get('btn_add'):
+        result = add_comment(article_id,  request)
+        data =  {'status': 'ok', 'user': str(request.user)}
+        if result == False:
+            data['status'] = 'error'
+        return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
+
+    if request.GET.get('btn_like'):
+        result = addLike(article_id, request)
+        likes = getLikes(article_id)
+        data =  {'status': 'ok', 'likes': likes}
+        if result == False:
+            data['status'] = 'error'
+        return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
+
     temp = Article.objects.filter(pk=article_id)[0]
     comments = CommentsToArticles.objects.filter(arcticle=temp)
     com = []

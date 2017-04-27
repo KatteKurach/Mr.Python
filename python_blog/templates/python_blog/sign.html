@@ -5,6 +5,10 @@
         <link href="{% static 'python_blog/sign.css' %}" type="text/css"     rel="stylesheet">
         <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+        <script type="text/javascript" src="{% static 'python_blog/sign.js' %}"></script>
         <title>Mr. Python</title>
          <meta name="Python">
     </head>
@@ -12,19 +16,17 @@
         <div class="out w3-display-container w3-grayscale-min">
             <p id="head">Sign in</p>
             <div id="main_d">
-                <form role="form" action="#" method="post">
-                    {% csrf_token %}
-                    <p>User name</p>
-                    <input name="user_name" class="form-control input-lg" type="text"/>
-                    <p>Email</p>
-                    <input name="in_email"class="form-control input-lg" type="email"/>
-                    <p>Password</p>
-                    <input name="in_password" class="form-control input-lg" type="password"/>
-                    <p>Confirm password</p>
-                    <input name="in_conf" class="form-control input-lg" type="password"/><p/>
-                    <br>
-                    <input name="btn_sign" id="btn_sign" class="btn btn-warning" type="submit" value="Save"/>
-                </form>
+                {% csrf_token %}
+                <p>User name</p>
+                <input id="user_name" name="user_name" class="form-control input-lg" type="text"/>
+                <p>Email</p>
+                <input id="in_email" name="in_email"class="form-control input-lg" type="email"/>
+                <p>Password</p>
+                <input id="in_password" name="in_password" class="form-control input-lg" type="password"/>
+                <p>Confirm password</p>
+                <input id="in_conf" name="in_conf" class="form-control input-lg" type="password"/><p/>
+                <br>
+                <input name="btn_sign" id="btn_sign" class="btn btn-warning" type="button" value="Save"/>
             </div>
             <br><br><br><br><br><br>
         </div>

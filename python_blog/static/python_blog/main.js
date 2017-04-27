@@ -23,16 +23,18 @@ function settleResponse(data) {
 
 function searchRequest() {
     var request = parseQuery();
-    $.ajax({
-        url: '',
-        type: 'GET',
-        data: {
-            query: request 
-        },
-        success: function(data) {
-            settleResponse(data);
-        }
-    });
+    if (request !== ''){
+        $.ajax({
+            url: '',
+            type: 'GET',
+            data: {
+                query: request
+            },
+            success: function(data) {
+                settleResponse(data);
+            }
+        });
+    }
 }
 
 
@@ -47,6 +49,24 @@ function setHandlers() {
             });
         }
         searchRequest(); 
+    });
+    $('#log_out').click(function() {
+        $.ajax({
+            url: '',
+            type: 'GET',
+            data: {
+                log_out: true
+            },
+            success: function(data) {
+                location.reload();
+            }
+        });
+    });
+    $('#log').click(function() {
+        window.location.href = 'http://127.0.0.1:8000/home/log/#';
+    });
+    $('#sign').click(function() {
+        window.location.href = 'http://127.0.0.1:8000/home/sign/#';
     });
 }
 
