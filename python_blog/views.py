@@ -107,6 +107,9 @@ def log(request):
         g_email = request.GET.get('email_s')
         g_password = request.GET.get('password_s')
         name = Users.objects.filter(email=g_email)
+        print '_________________'
+        print name
+        print g_email
         if (len(name) == 0):
             data =  {'status': 'error'}
             return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
