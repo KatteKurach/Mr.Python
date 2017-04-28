@@ -48,7 +48,7 @@ function setHandlers() {
                 'margin-top' : "-=250px"
             });
         }
-        searchRequest(); 
+        searchRequest();
     });
     $('#log_out').click(function() {
         $.ajax({
@@ -63,10 +63,10 @@ function setHandlers() {
         });
     });
     $('#log').click(function() {
-        window.location.href = 'http://127.0.0.1:8000/home/log/#';
+        window.location.href = 'https://mr-python.herokuapp.com/home/log/#';
     });
     $('#sign').click(function() {
-        window.location.href = 'http://127.0.0.1:8000/home/sign/#';
+        window.location.href = 'https://mr-python.herokuapp.com/home/sign/#';
     });
 }
 

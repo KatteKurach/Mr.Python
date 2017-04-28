@@ -39,7 +39,7 @@ function log_user() {
                         timer: 3000
                     },
                     function() {
-                        window.location.href = 'http://127.0.0.1:8000/home/';
+                        window.location.href = 'https://mr-python.herokuapp.com/home/';
                     });
                 }
                 if (data['status'] === 'error') {
@@ -51,7 +51,7 @@ function log_user() {
                     });
                 }
                 if (data['status'] === 'admin') {
-                    window.location.href = 'http://127.0.0.1:8000/home/hadmin/';
+                    window.location.href = 'https://mr-python.herokuapp.com/hadmin/';
                 }
             },
             error: function(data) {

@@ -59,7 +59,7 @@ function save_user() {
                         type: "success"
                     },
                     function(){
-                        window.location.href = 'http://127.0.0.1:8000/home/log/#';
+                        window.location.href = 'https://mr-python.herokuapp.com/home/log/#';
                     });
 				}
             },
