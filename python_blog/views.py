@@ -10,6 +10,13 @@ import json
 from django.contrib.auth.models import User as u
 from django.contrib.auth import authenticate, login, logout
 
+
+def save_profile(backend, user, response, *args, **kwargs):
+    if backend.name == "google-oauth2":
+        print '_______here________'
+        # do something
+
+
 def remake(s):
     s = s.strip().lower()
     temp = s.split(' ')
@@ -82,6 +89,16 @@ def admin(request):
 def home(request):
     context = {'user': True}
     if request.user.is_authenticated:
+        if request.user.social_auth.filter(provider='google-oauth2'):
+            if len(Users.objects.filter(email=request.user.email)) == 0:
+                new_user = Users(username=request.user.username,
+                                 email=request.user.email,
+                                 password='google')
+                new_user.save()
+                if len(u.objects.filter(email=request.user.email)) == 0:
+                    add_u = u.objects.create_user(request.user.username, request.user.email, 'google')
+                    add_u.save()
+            print 'user is using Google Account!'
         context['user'] = False
     if request.GET.get('log_out'):
         logout(request)
@@ -107,8 +124,6 @@ def log(request):
         g_email = request.GET.get('email_s')
         g_password = request.GET.get('password_s')
         name = Users.objects.filter(email=g_email)
-        print '_________________'
-        print name
         print g_email
         if (len(name) == 0):
             data =  {'status': 'error'}
@@ -143,7 +158,6 @@ def sign(request):
             new_user.save()
             add_u = u.objects.create_user(name, new_email, new_password)
             add_u.save()
-            data =  {'status': 'ok'}
             return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
         else:
             data = {'status': 'bad_email'}
