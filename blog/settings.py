@@ -29,7 +29,17 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+            os.path.join(PROJECT_ROOT, 'static'),
+)
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'Client_ID'#AIzaSyB4LrrvGeJjV10lG56OtrT2wfLDq3wFmzA'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'QBj4L3KwV1-DtMxMqeSqK2lw'
@@ -127,8 +137,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
-STATIC_URL = '/static/'
 
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
