@@ -1,1 +1,1 @@
-web: python manage.py runserver 0.0.0.0:$PORT --noreload .gitignore - *.pyc
+web: python manage.py runserver 0.0.0.0:$PORT --noreload
