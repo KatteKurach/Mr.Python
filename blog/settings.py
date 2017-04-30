@@ -36,10 +36,10 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = 'home'
 LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = '/home/'
+LOGIN_REDIRECT_URL = 'home'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-            os.path.join(PROJECT_ROOT, 'static'),
+    os.path.join(PROJECT_ROOT, 'static'),
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
@@ -47,6 +47,11 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '598313207623-24pk61ubsff2ctkig1m5sifm56c9miif.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'euR_iamyuSUUAl4mwfmdp_Iy'
 
+SOCIAL_AUTH_GITHUB_KEY = 'aa9009b453e6597dcab7'
+SOCIAL_AUTH_GITHUB_SECRET = '27bb7406724a3c525381c6f9923756a438f5476a'
+
+SOCIAL_AUTH_TWITTER_KEY = 'vbWzTheBsfpGuO7yJlsvDmTrn'
+SOCIAL_AUTH_TWITTER_SECRET = 'ZtXr4mXDPfE4yQtbmPE3GKf8Zlrgz0aczC5Xt0rgsPM6TC9Xyn'
 
 INSTALLED_APPS = [
     'python_blog',
@@ -103,9 +108,13 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOAuth2',
+   # 'social.backends.facebook.FacebookOAuth2',
+    'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
-    )
+)
+
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 

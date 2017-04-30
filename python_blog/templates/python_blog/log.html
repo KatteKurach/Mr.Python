@@ -14,19 +14,25 @@
     </head>
     <body>
         {% csrf_token %}
-        <div class="out w3-display-container w3-grayscale-min">
-            <p id="head">Log in</p>
-            <div id="main_d">
-                {% csrf_token %}
-                <p>Email</p>
-                <input id="email_s" name="email_s" class="form-control input-lg" type="email"/>
-                <p>Password</p>
-                <input id="password_s" name="password_s" class="form-control input-lg" type="password"/>
-                <br>
-                <input id="btn_log" name="btn_log" class="btn btn-warning" type="button" value="Log in"/>
-            </div>
-            <a href="{% url 'social:begin' 'google-oauth2' %}">Login with google</a><br>
-            <br><br><br><br><br><br<br><br><br><br><br><br><br><br><br><br><br>
+        <p id="head">Log in</p>
+        <div class="social">
+            <a id="google" href="{% url 'social:begin' 'google-oauth2' %}">
+                <div class="google_eyes"></div>
+            </a>
+            <div class="padding"> </div>
+            <a id="github" href="{% url 'social:begin' 'github' %}"/>
+                <div class="github_eyes"></div>
+            </a>
         </div>
+
+        <div id="main_d">
+            {% csrf_token %}
+            <p>Email</p>
+            <input id="email_s" name="email_s" class="form-control input-lg" type="email"/>
+            <p>Password</p>
+            <input id="password_s" name="password_s" class="form-control input-lg" type="password"/>
+            <br>
+            <input id="btn_log" name="btn_log" class="btn btn-warning" type="button" value="Log in"/>
+         </div>
     </body>
 </html>

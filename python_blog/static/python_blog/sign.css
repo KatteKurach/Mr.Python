@@ -1,17 +1,14 @@
-
-html {
+body {
+    background: url("images/fon4.jpg") repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%;
     background-color: black;
 }
 
-.out {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("images/fon4.jpg");
-    min-height: 100%;
-}
-
 #head {
-    padding-top: 100px;
+    padding-top: 5%;
     text-align: center;
     color:white;
     font-family: "Comic Sans MS", cursive, sans-serif;
@@ -22,17 +19,14 @@ html {
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-size: 16pt;
     color: white;
-    padding-top: 50px;;
     margin: 0 auto;
-    position: relative;
     top: 25%;
     width: 30%;
-    height: 100%;
 }
 
 #btn_sign {
-    width: 150px;
-    margin-left: 100px;
+    width: 40%;
+    margin-left: 30%;
 }
 
 input.highlight {

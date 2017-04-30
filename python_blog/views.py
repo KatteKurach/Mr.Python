@@ -89,6 +89,7 @@ def admin(request):
 def home(request):
     context = {'user': True}
     if request.user.is_authenticated:
+        print 'yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
         if request.user.social_auth.filter(provider='google-oauth2'):
             if len(Users.objects.filter(email=request.user.email)) == 0:
                 new_user = Users(username=request.user.username,
@@ -158,7 +159,7 @@ def sign(request):
             new_user.save()
             add_u = u.objects.create_user(name, new_email, new_password)
             add_u.save()
-            return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')
+            data =  {'status': 'ok'}
         else:
             data = {'status': 'bad_email'}
         return HttpResponse(json.dumps(data, cls=DjangoJSONEncoder), content_type='application/json')

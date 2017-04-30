@@ -13,22 +13,19 @@
          <meta name="Python">
     </head>
     <body>
-        <div class="out w3-display-container w3-grayscale-min">
-            <p id="head">Sign in</p>
-            <div id="main_d">
-                {% csrf_token %}
-                <p>User name</p>
-                <input id="user_name" name="user_name" class="form-control input-lg" type="text"/>
-                <p>Email</p>
-                <input id="in_email" name="in_email"class="form-control input-lg" type="email"/>
-                <p>Password</p>
-                <input id="in_password" name="in_password" class="form-control input-lg" type="password"/>
-                <p>Confirm password</p>
-                <input id="in_conf" name="in_conf" class="form-control input-lg" type="password"/><p/>
-                <br>
-                <input name="btn_sign" id="btn_sign" class="btn btn-warning" type="button" value="Save"/>
-            </div>
-            <br><br><br><br><br><br>
+        <p id="head">Sign in</p>
+        <div id="main_d">
+            {% csrf_token %}
+            <p>User name</p>
+            <input id="user_name" name="user_name" class="form-control input-lg" type="text"/>
+            <p>Email</p>
+            <input id="in_email" name="in_email"class="form-control input-lg" type="email"/>
+            <p>Password</p>
+            <input id="in_password" name="in_password" class="form-control input-lg" type="password"/>
+            <p>Confirm password</p>
+            <input id="in_conf" name="in_conf" class="form-control input-lg" type="password"/><p/>
+            <br>
+            <input name="btn_sign" id="btn_sign" class="btn btn-warning" type="button" value="Save"/>
         </div>
     </body>
 </html>

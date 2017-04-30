@@ -1,12 +1,12 @@
 #for_article {
-    max-width: 650px;
+    max-width: 40%;
     height: 120px;
-    margin-left: 320px;
+    margin-left: 30%;
 }
 
 #h_article {
-    padding-top: 20px;
-    margin-left: 550px;
+    padding-top: 5%;
+    margin-left: 45%;
     color: #69536C;
     font-size: 21pt;
     font-family: "Comic Sans MS", cursive, sans-serif;
@@ -14,20 +14,20 @@
 
 #min_text {
     font-size: 12px;
-    margin-left: 10px;
+    margin-left: 2%;
 }
 
 #name_ar {
-    padding-top: 10px;
-    margin-left: 10px;
+    padding-top: 5%;
+    margin-left: 2%;
     color: #99004C;
     font-size: 14pt;
 }
 
 
 #time {
-    margin-left: 15px;
-    margin-top: 5px;
+    margin-left: 2%;
+    margin-top: 1%;
     font-size: 10pt;
     color: #A0A0A0;
     font-family: 'Gill Sans', sans-serif;

@@ -1,5 +1,5 @@
 #header {
-    padding-top: 50px;
+    padding-top: 5%;
     text-align: center;
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-size: 21pt;
@@ -7,7 +7,7 @@
 }
 
 #date {
-    padding-right: 50px;
+    padding-right: 5%;
     text-align: right;
     font-family: "Comic Sans MS", cursive, sans-serif;
     font-size: 17pt;
@@ -78,7 +78,7 @@
 
 #one_comment {
     margin-left: 30%;
-    width: 40%; 
+    width: 40%;
 }
 
 #username {
