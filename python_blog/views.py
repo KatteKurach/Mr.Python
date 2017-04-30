@@ -89,7 +89,6 @@ def admin(request):
 def home(request):
     context = {'user': True}
     if request.user.is_authenticated:
-        print 'yeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee'
         if request.user.social_auth.filter(provider='google-oauth2'):
             if len(Users.objects.filter(email=request.user.email)) == 0:
                 new_user = Users(username=request.user.username,
@@ -100,6 +99,16 @@ def home(request):
                     add_u = u.objects.create_user(request.user.username, request.user.email, 'google')
                     add_u.save()
             print 'user is using Google Account!'
+        if request.user.social_auth.filter(provider='github'):
+            if len(Users.objects.filter(email=request.user.email)) == 0:
+                new_user = Users(username=request.user.username,
+                                 email=request.user.email,
+                                 password='github')
+                new_user.save()
+                if len(u.objects.filter(email=request.user.email)) == 0:
+                    add_u = u.objects.create_user(request.user.username, request.user.email, 'github')
+                    add_u.save()
+            print 'user is using Github Account!'
         context['user'] = False
     if request.GET.get('log_out'):
         logout(request)
